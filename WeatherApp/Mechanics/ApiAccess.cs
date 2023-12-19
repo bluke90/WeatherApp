@@ -23,21 +23,26 @@ namespace WeatherApp.Mechanics
 
 
             client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+
         }
 
         public async Task GetWeatherData() {
             
             // create a variable to hold the information for the request
             var values = new List<KeyValuePair<string, string>>();
-            
+
             // add the data for the request to the values variable
-            values.Add(new KeyValuePair<string, string>("input", "{'stations':['msu@leon.weatherstem.com'], 'api_key':'" + Key + "'}"));
+            values.Add(new KeyValuePair<string, string>("input", "{'stations':['fsu@leon.weatherstem.com'],'api_key':'3t9tbbzi'}"));
+
             // Console.WriteLine just writes any data to the console so we dont have to make a whole page just to test
-            Console.WriteLine("{'stations':['msu@leon.weatherstem.com'], 'api_key':'" + Key + "'}");
+            Console.WriteLine(values[0]);
 
             // convert the request value into a URL request
             var content = new FormUrlEncodedContent(values);
-            Console.WriteLine(content);
+
+            // Request should = "https://api.weatherstem.com/api?input={"api_key":"3t9tbbzi","stations":["msu@leon.weatherstem.com"]}"
 
             // Send the request and store the response in "response" variable
             var response = await client.PostAsync(URL, content);
