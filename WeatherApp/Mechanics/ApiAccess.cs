@@ -34,7 +34,7 @@ namespace WeatherApp.Mechanics
             var values = new List<KeyValuePair<string, string>>();
 
             // add the data for the request to the values variable
-            values.Add(new KeyValuePair<string, string>("input", "{'stations':['fsu@leon.weatherstem.com'],'api_key':'3t9tbbzi'}"));
+            values.Add(new KeyValuePair<string, string>("input", "{\"stations\":[\"fsu@leon.weatherstem.com\"],\"api_key\":\"3t9tbbzi\"}"));
 
             // Console.WriteLine just writes any data to the console so we dont have to make a whole page just to test
             Console.WriteLine(values[0]);
@@ -42,7 +42,7 @@ namespace WeatherApp.Mechanics
             // convert the request value into a URL request
             var content = new FormUrlEncodedContent(values);
 
-            // Request should = "https://api.weatherstem.com/api?input={"api_key":"3t9tbbzi","stations":["msu@leon.weatherstem.com"]}"
+            // Request should = "https://api.weatherstem.com/api?input={"api_key":"3t9tbbzi","stations":["fsu@leon.weatherstem.com"]}"
 
             // Send the request and store the response in "response" variable
             var response = await client.PostAsync(URL, content);
