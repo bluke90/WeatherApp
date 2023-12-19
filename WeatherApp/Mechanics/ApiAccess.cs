@@ -13,26 +13,39 @@ namespace WeatherApp.Mechanics
     public class ApiAccess
     {
         public string Key = "3t9tbbzi";
-        public string JSONstr { get; set; }
         public string URL = "https://api.weatherstem.com/api";
+
+        // HttpClient is basically the tool you use to communicate with the API interface
         public HttpClient client { get; set; }
 
         public ApiAccess() {
+            // this is the initilization funciton, it will be run any time a new ApiAccess class is created
+
+
             client = new HttpClient();
         }
 
         public async Task GetWeatherData() {
+            
+            // create a variable to hold the information for the request
             var values = new List<KeyValuePair<string, string>>();
-
+            
+            // add the data for the request to the values variable
             values.Add(new KeyValuePair<string, string>("input", "{'stations':['msu@leon.weatherstem.com'], 'api_key':'" + Key + "'}"));
+            // Console.WriteLine just writes any data to the console so we dont have to make a whole page just to test
             Console.WriteLine("{'stations':['msu@leon.weatherstem.com'], 'api_key':'" + Key + "'}");
 
+            // convert the request value into a URL request
             var content = new FormUrlEncodedContent(values);
+            Console.WriteLine(content);
 
+            // Send the request and store the response in "response" variable
             var response = await client.PostAsync(URL, content);
 
+            // Convert the response to english basically
             var responseString = await response.Content.ReadAsStringAsync();
 
+            // print data out
             Console.WriteLine(responseString);
         }
         
