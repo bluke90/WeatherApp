@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using static System.Net.WebRequestMethods;
+using WeatherApp.Mechanics.Model;
 
 namespace WeatherApp.Mechanics
 {
@@ -49,6 +52,11 @@ namespace WeatherApp.Mechanics
 
             // Convert the response to english basically
             var responseString = await response.Content.ReadAsStringAsync();
+
+            // Parse response
+            List<Root> r = (List<Root>)JsonConvert.DeserializeObject(responseString, typeof(List<Root>));
+
+
 
             // print data out
             Console.WriteLine(responseString);
