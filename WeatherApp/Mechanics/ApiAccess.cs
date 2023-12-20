@@ -23,15 +23,11 @@ namespace WeatherApp.Mechanics
 
         public ApiAccess() {
             // this is the initilization funciton, it will be run any time a new ApiAccess class is created
-
-
             client = new HttpClient();
             client.BaseAddress = new Uri(URL);
-
-
         }
 
-        public async Task GetWeatherData() {
+        public async Task<WeatherData> GetWeatherData() {
             
             // create a variable to hold the information for the request
             var values = new List<KeyValuePair<string, string>>();
@@ -54,12 +50,10 @@ namespace WeatherApp.Mechanics
             var responseString = await response.Content.ReadAsStringAsync();
 
             // Parse response
-            List<Root> r = (List<Root>)JsonConvert.DeserializeObject(responseString, typeof(List<Root>));
+            List<WeatherData> r = (List<WeatherData>)JsonConvert.DeserializeObject(responseString, typeof(List<WeatherData>));
 
-
-
-            // print data out
-            Console.WriteLine(responseString);
+            // return data object
+            return r[0];
         }
         
 

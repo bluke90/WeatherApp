@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace WeatherApp.Mechanics.Model
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
@@ -55,7 +56,7 @@ namespace WeatherApp.Mechanics.Model
         public Hilo hilo { get; set; }
     }
 
-    public class Root
+    public class WeatherData
     {
         public Record record { get; set; }
         public Station station { get; set; }
@@ -72,6 +73,38 @@ namespace WeatherApp.Mechanics.Model
         public string wunderground { get; set; }
         public string facebook { get; set; }
         public string lon { get; set; }
+    }
+
+    public static class WeatherDataUtils {
+        public static string GetSensorValue(this WeatherData data, string sensor) {
+            string value;
+
+            if (data == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            Reading reading = data.record.readings.Where(reading => reading.sensor == sensor).FirstOrDefault();
+
+            value = reading.value.ToString();
+
+            return value;
+        }
+
+        public static string GetSensorSymbol(this WeatherData data, string sensor) {
+            string value;
+
+            if (data == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            Reading reading = data.record.readings.Where(reading => reading.sensor == sensor).FirstOrDefault();
+
+            value = reading.unit_symbol.ToString();
+
+            return value;
+        }
     }
 
 }

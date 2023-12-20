@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using WeatherApp.Mechanics;
 
 namespace WeatherApp
 {
@@ -14,8 +15,12 @@ namespace WeatherApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<ApiAccess>();
+            builder.Services.AddSingleton <MainPage>();
+            builder.Services.AddSingleton<CameraPage>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
