@@ -105,6 +105,37 @@ namespace WeatherApp.Mechanics.Model
 
             return value;
         }
+
+        public static double GetElevation(this WeatherData data) {
+
+            double standard_bar = 29.92;
+            double current_bar = double.Parse(data.GetSensorValue("Barometer"));
+            double elevation = (current_bar - standard_bar)*1000;
+            return elevation;
+        }
+
+        public static string GetCardinalDirection(this WeatherData data) {
+            int degrees = int.Parse(data.GetSensorValue("Wind Vane"));
+
+            // Make sure degrees are within the range [0, 360)
+            degrees = (degrees % 360 + 360) % 360;
+
+            // Define cardinal directions and their corresponding degree ranges
+            string[] directions = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
+            double[] ranges = { 11.25, 33.75, 56.25, 78.75, 101.25, 123.75, 146.25, 168.75, 191.25, 213.75, 236.25, 258.75, 281.25, 303.75, 326.25, 348.75, 360.0 };
+
+            // Find the correct cardinal direction
+            for (int i = 0; i < directions.Length - 1; i++)
+            {
+                if (degrees < ranges[i + 1])
+                {
+                    return directions[i];
+                }
+            }
+
+            // This should not happen, but just in case
+            return "Unknown";
+        }
     }
 
 }

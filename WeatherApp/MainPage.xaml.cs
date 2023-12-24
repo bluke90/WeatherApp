@@ -17,50 +17,18 @@ namespace WeatherApp
             PopulateData();
         }
 
-        private async Task GetData() {
-            // Request Weather data and store result to Data
-            Data = await api.GetWeatherData();
-
-        }
-
-        private static Label GenerateDataLabel(string sensor, string value, string symbol) {
-            var stringSymbol = "";
-            if (symbol == "&deg;F" || symbol == "&deg;")
-            {
-                stringSymbol = "°";
-            } else {
-                stringSymbol = symbol;
-            }
-
-            Label lbl = new Label
-            {
-                Text = $"{sensor}: {value} {stringSymbol}",
-                FontSize = 20,
-                TextColor = Colors.White
-            };
-
-            return lbl;
-        }
-
         private async void PopulateData() {
             await GetData();
 
+            temp.Text = Data.GetSensorValue("Thermometer");
+            windLbl.Text = $"{Data.GetCardinalDirection()} @ {Data.GetSensorValue("10 Minute Wind Gust")} mph";
+            humidityLbl.Text = $"{Data.GetSensorValue("Hygrometer")}%";
+            rainfallLbl.Text = $"{Data.GetSensorValue("Rain Gauge")} in.";
+        }
 
-            foreach (Reading reading in Data.record.readings)
-            {
-                var label = GenerateDataLabel(reading.sensor, reading.value.ToString(), reading.unit_symbol);
-                DataStack.Add(label);
-            }
-
-
-
-            //"Rain Gauge"
-            // Hygrometer
-            // Dewpoint
-            // "Anemometer"
-            //		unit_symbol
-
-
+        private async Task GetData() {
+            // Request Weather data and store result to Data
+            Data = await api.GetWeatherData();
 
         }
     }

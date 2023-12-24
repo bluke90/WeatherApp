@@ -17,6 +17,14 @@
                 Route="MainPage" />
         </Tab>
 
+        <Tab Title="Sensors"
+             Icon="sensors_icon.png">
+            <ShellContent
+                Title="Sensors"
+                ContentTemplate="{DataTemplate local:SensorsPage}"
+                Route="SensorsPage" />
+        </Tab>
+
         <Tab Title="Cameras"
              Icon="camera_icon.png">
             <ShellContent

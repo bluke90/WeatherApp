@@ -18,6 +18,7 @@ namespace WeatherApp
             builder.Services.AddSingleton<ApiAccess>();
             builder.Services.AddSingleton <MainPage>();
             builder.Services.AddSingleton<CameraPage>();
+            builder.Services.AddSingleton<SensorsPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
