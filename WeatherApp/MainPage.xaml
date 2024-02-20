@@ -34,13 +34,20 @@
                        FontSize="40"
                        FontAttributes="Bold"/>
 
+                <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    HorizontalOptions="EndAndExpand"
+                    Margin="0,0,20,0"
+                    x:Name="currentIcon"/>
+
             </Grid>
             <Frame BackgroundColor="Black" HasShadow="True" CornerRadius="0" BorderColor="Transparent" Padding="0">
                 <Frame.Shadow>
-                    <Shadow Brush="White"
-                            Offset="20,20"
+                    <Shadow Brush="Black"
+                            Offset="40,40"
                             Radius="40"
-                            Opacity="0.8"/>
+                            Opacity="0.9"/>
                 </Frame.Shadow>
             <Grid Padding="0,0" Margin="0,0">
                 <Grid.RowDefinitions>
@@ -109,7 +116,7 @@
                     </Frame>
 
                     <Frame BackgroundColor="Transparent" BorderColor="{StaticResource Gray900}" CornerRadius="0" Grid.Row="1" Grid.Column="1" Margin="0" Padding="0">
-                        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Margin="8,8">
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" Margin="8,8">
                             <HorizontalStackLayout Padding="0">
                                 <Label Text="Elevation       "
                                FontSize="18"
@@ -141,6 +148,29 @@
 
                 </Grid>
             </Frame>
+
+            <WebView>
+                <WebView.Source>
+                    <HtmlWebViewSource>
+                        <HtmlWebViewSource.Html>
+                            <![CDATA[
+                            <html>
+                            <head>
+                                <LINK rel="stylesheet" href="https://apiv2.weatherstem.com/apiv2.min.css" />
+
+                                <META NAME="WeatherSTEM-api-key" CONTENT="dfaacccc-3bb9-da34-4568-a7c1cec3cb63" />
+                            </head>
+                            <body>
+                            <p><a href="MainPage.html">next page</a></p>
+                            
+                            <SCRIPT src="https://apiv2.weatherstem.com/apiv2.min.js"></SCRIPT>
+                            </body>
+                            </html>                    
+                            ]]>
+                        </HtmlWebViewSource.Html>
+                    </HtmlWebViewSource>
+                </WebView.Source>
+            </WebView>
             <!--
                 *   Temp
                 *   Cloud coverage

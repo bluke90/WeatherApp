@@ -25,8 +25,9 @@ public partial class SensorsPage : ContentPage
 
     }
 
+    // Generate data label inside frame
     private static Frame GenerateDataLabel(string sensor, string value, string symbol) {
-
+        // Init frame
         var frame = new Frame()
         {
             BorderColor = Colors.White,
@@ -35,7 +36,7 @@ public partial class SensorsPage : ContentPage
             Padding = new Thickness(10)
         };
 
-
+        // Check for degrees and change to text symbol
         var stringSymbol = "";
         if (symbol == "&deg;F" || symbol == "&deg;")
         {
@@ -44,7 +45,7 @@ public partial class SensorsPage : ContentPage
         {
             stringSymbol = symbol;
         }
-
+        // init label
         Label lbl = new Label
         {
             Text = $"{sensor}: {value} {stringSymbol}",
@@ -56,10 +57,12 @@ public partial class SensorsPage : ContentPage
         return frame;
     }
 
+    // Populate data for sensor page
     private async void PopulateData() {
+        // get data
         await GetData();
 
-
+        // populate data label for each sensor
         foreach (Reading reading in Data.record.readings)
         {
             var frame = GenerateDataLabel(reading.sensor, reading.value.ToString(), reading.unit_symbol);

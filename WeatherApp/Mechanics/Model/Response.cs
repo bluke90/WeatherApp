@@ -91,21 +91,32 @@ namespace WeatherApp.Mechanics.Model
             return value;
         }
 
+        /// <summary>
+        /// Get measurement symbol for desired sensor
+        /// </summary>
+        /// <param name="data">WeatherData Instance</param>
+        /// <param name="sensor">Sensor name</param>
+        /// <returns>(string)symbol</returns>
+        /// <exception cref="NullReferenceException"></exception>
         public static string GetSensorSymbol(this WeatherData data, string sensor) {
             string value;
-
+            // check for instance
             if (data == null)
             {
                 throw new NullReferenceException();
             }
-
+            // Get symbol
             Reading reading = data.record.readings.Where(reading => reading.sensor == sensor).FirstOrDefault();
 
             value = reading.unit_symbol.ToString();
 
             return value;
         }
-
+        /// <summary>
+        /// Retrieve Elevation Information based on barometric pressure
+        /// </summary>
+        /// <param name="data">WeatherData Instance</param>
+        /// <returns>(double)elevation</returns>
         public static double GetElevation(this WeatherData data) {
 
             double standard_bar = 29.92;
@@ -114,6 +125,11 @@ namespace WeatherApp.Mechanics.Model
             return elevation;
         }
 
+        /// <summary>
+        /// Retrieve Cardinal direction from wind vane value
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>(string)Cardinal Direction</returns>
         public static string GetCardinalDirection(this WeatherData data) {
             int degrees = int.Parse(data.GetSensorValue("Wind Vane"));
 

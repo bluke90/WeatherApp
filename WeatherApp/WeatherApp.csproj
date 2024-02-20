@@ -51,7 +51,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\camera_icon.png" />
 	  <None Remove="Resources\Images\home_icon.png" />
+	  <None Remove="Resources\Images\rain_icon.png" />
+	  <None Remove="Resources\Images\rain_icon_white.png" />
 	  <None Remove="Resources\Images\sensors_icon.png" />
+	  <None Remove="Resources\Images\sunny_icon.png" />
+	  <None Remove="Resources\Images\sunny_icon_white.png" />
 	</ItemGroup>
 
 	<ItemGroup>

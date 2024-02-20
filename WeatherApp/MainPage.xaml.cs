@@ -20,6 +20,14 @@ namespace WeatherApp
         private async void PopulateData() {
             await GetData();
 
+            // Parse rain rate to determine if its raining
+            if (float.Parse(Data.GetSensorValue("Rain Rate")) == 0)
+            {
+                currentIcon.Source = ImageSource.FromFile("sunny_icon_white.png");
+            } else {
+                currentIcon.Source = ImageSource.FromFile("rain_icon_white.png");
+            }
+            // Populate data on screen
             temp.Text = Data.GetSensorValue("Thermometer");
             windLbl.Text = $"{Data.GetCardinalDirection()} @ {Data.GetSensorValue("10 Minute Wind Gust")} mph";
             humidityLbl.Text = $"{Data.GetSensorValue("Hygrometer")}%";
