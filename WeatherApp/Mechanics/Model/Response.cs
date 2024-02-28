@@ -75,15 +75,16 @@ namespace WeatherApp.Mechanics.Model
         public string lon { get; set; }
     }
 
+    // Static utility class for WeatherData Instances
     public static class WeatherDataUtils {
         public static string GetSensorValue(this WeatherData data, string sensor) {
             string value;
-
+            // check for instance
             if (data == null)
             {
                 throw new NullReferenceException();
             }
-
+            // Get sensor value
             Reading reading = data.record.readings.Where(reading => reading.sensor == sensor).FirstOrDefault();
 
             value = reading.value.ToString();
